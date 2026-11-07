@@ -374,7 +374,7 @@ fi
 cat > "$BASE/launch.sh" <<'SH'
 #!/bin/bash
 # Starts a game in Eglantine, fullscreen:
-#   a Switch 2 game folder (name.s2) or a Switch file (.nsp .nsz .xci .xcz .nca .nro .nso .kip)
+#   a Switch 2 game folder (name.s2) or a file (.nsp .nsz .nup .xci .xcz .nca .nro .nso .kip)
 BASE="/userdata/system/eglantine"
 LOG="/userdata/system/logs/eglantine.log"
 CONF="/userdata/system/batocera.conf"
@@ -505,7 +505,7 @@ cat > "$ES_CFG" <<'XML'
     <name>switch2</name>
     <fullname>Switch 2</fullname>
     <path>/userdata/roms/switch2</path>
-    <extension>.s2 .S2 .nsp .NSP .nsz .NSZ .xci .XCI .xcz .XCZ .nca .NCA .nro .NRO .nso .NSO .kip .KIP</extension>
+    <extension>.s2 .S2 .nsp .NSP .nsz .NSZ .nup .NUP .xci .XCI .xcz .XCZ .nca .NCA .nro .NRO .nso .NSO .kip .KIP</extension>
     <command>/userdata/system/eglantine/launch.sh "%ROM_RAW%"</command>
     <platform>ignore</platform>
     <theme>switch2</theme>
@@ -525,7 +525,7 @@ echo
 echo " Place your keys in:      $KEYS_DIR"
 echo " Place your firmware in:  $FW_DIR"
 echo " Place your games in:     $ROM_DIR"
-echo "   Switch 2: game folder name.s2   Switch: .nsp .nsz .xci .xcz .nca .nro .nso .kip"
+echo "   Switch 2: game folder name.s2   Files: .nsp .nsz .nup .xci .xcz .nca .nro .nso .kip"
 echo " Settings: F1 file manager -> Applications -> Eglantine"
 echo "======================================================================"
 echo

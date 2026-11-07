@@ -2,7 +2,7 @@
 
 *Created by DeLorean23* · [Deutsche Anleitung: LIESMICH.md](LIESMICH.md)
 
-This installer adds a dedicated **"Switch 2"** system to Batocera using the experimental Eglantine emulator (https://github.com/Djihads80/Eglantine). You can launch games in fullscreen from the game list, just like with any other emulator. Besides Switch 2 games, the familiar Switch 1 formats are supported as well.
+This installer adds a dedicated **"Switch 2"** system to Batocera using the experimental Eglantine emulator (https://github.com/Djihads80/Eglantine). You can launch games in fullscreen from the game list, just like with any other emulator. Besides Switch 2 games, the familiar Switch 1 formats and Eglantine's `.nup` format are supported as well.
 
 ## Download
 
@@ -51,11 +51,14 @@ The game list displays the folder name without the extension, for example, "Game
 *Switch 1 games:* The familiar Switch 1 formats are supported too. Simply place the file in the same folder:
 `.nsp`, `.nsz`, `.xci`, `.xcz`, `.nca`, `.nro`, `.nso`, `.kip`
 
+*`.nup` files:* Eglantine's own format that bundles a game with its update and DLC in a single file. Place it in the same folder; Eglantine automatically uses the newest update inside, so nothing has to be installed separately.
+
 ```text
 /userdata/roms/switch2/
   GameName.s2/
   GameName.nsp
   GameName.xci
+  GameName.nup
 ```
 
 Tip: Don't put updates or DLCs (`.nsp`) in the games folder, or they will show up as separate games in the list. Install them once through Eglantine instead: **F1 → Applications → Eglantine → File → Install Files**.
