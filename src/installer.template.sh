@@ -177,6 +177,34 @@ extract_payload() {  # extract_payload <name> <target file>
     awk -v n="$1" '$0=="__"n"_BEGIN__"{f=1;next} $0=="__"n"_END__"{f=0} f' "$SELF" | base64 -d > "$2"
 }
 
+# Cover for this Ports entry: write it into the Ports gamelist
+update_gamelist() {
+python3 - "$SELF_DIR/gamelist.xml" "./$SELF_NAME" "./images/$SELF_STEM.jpg" "$SELF_STEM" <<'PY'
+import os, sys
+import xml.etree.ElementTree as ET
+gl, path, image, name = sys.argv[1:5]
+if os.path.exists(gl):
+    tree = ET.parse(gl); root = tree.getroot()
+else:
+    root = ET.Element("gameList"); tree = ET.ElementTree(root)
+game = None
+for g in root.findall("game"):
+    p = g.findtext("path") or ""
+    if os.path.basename(p) == os.path.basename(path):
+        game = g; break
+if game is None:
+    game = ET.SubElement(root, "game")
+    ET.SubElement(game, "path").text = path
+for tag, val in (("name", name), ("image", image), ("thumbnail", image)):
+    el = game.find(tag)
+    if el is None:
+        el = ET.SubElement(game, tag)
+    el.text = val
+tree.write(gl, encoding="utf-8", xml_declaration=True)
+print("gamelist updated")
+PY
+}
+
 # ---------------------------------------------------------------------------
 # Start
 # ---------------------------------------------------------------------------
@@ -253,6 +281,9 @@ echo
 if (( FRESH == 0 )) && [[ "$INSTALLED" == "$TAG" && "$INSTALLED_VARIANT" == "$VARIANT" ]]; then
     echo "up to date"
     echo
+    mkdir -p "$SELF_DIR/images"
+    extract_payload POSTER "$SELF_DIR/images/$SELF_STEM.jpg"
+    update_gamelist >> "$LOG" 2>&1
     wait_key
     exit 0
 fi
@@ -745,34 +776,6 @@ echo "   Switch 2: game folder name.s2   Files: .nsp .nsz .nup .xci .xcz .nca .n
 echo " Settings: F1 file manager -> Applications -> Eglantine"
 echo "======================================================================"
 echo
-
-# Cover for this Ports entry: write it into the Ports gamelist
-update_gamelist() {
-python3 - "$SELF_DIR/gamelist.xml" "./$SELF_NAME" "./images/$SELF_STEM.jpg" "$SELF_STEM" <<'PY'
-import os, sys
-import xml.etree.ElementTree as ET
-gl, path, image, name = sys.argv[1:5]
-if os.path.exists(gl):
-    tree = ET.parse(gl); root = tree.getroot()
-else:
-    root = ET.Element("gameList"); tree = ET.ElementTree(root)
-game = None
-for g in root.findall("game"):
-    p = g.findtext("path") or ""
-    if os.path.basename(p) == os.path.basename(path):
-        game = g; break
-if game is None:
-    game = ET.SubElement(root, "game")
-    ET.SubElement(game, "path").text = path
-for tag, val in (("name", name), ("image", image), ("thumbnail", image)):
-    el = game.find(tag)
-    if el is None:
-        el = ET.SubElement(game, tag)
-    el.text = val
-tree.write(gl, encoding="utf-8", xml_declaration=True)
-print("gamelist updated")
-PY
-}
 
 if (( FRESH == 0 )); then
     update_gamelist >> "$LOG" 2>&1
