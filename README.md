@@ -73,6 +73,16 @@ If the controller does not respond in a game (Eglantine initially uses keyboard 
 
 These settings apply to all games. You can also adjust graphics and other options there. Vulkan, asynchronous shaders, and the shader cache are already configured by default.
 
+## Pop-up Windows Before a Game Starts
+
+Some games (for example Mario Kart World and Ocarina of Time) ask "Use the recommended settings?" before they start. These windows can be answered with the controller:
+
+- **D-pad left / right** – switch between Yes and No
+- **A** – confirm the marked button
+- **B** – No / Cancel
+
+This only works while such a window is open, so it never interferes with the game.
+
 ## Exit a Game
 
 Press **Select (or Guide) + Start** on the controller.

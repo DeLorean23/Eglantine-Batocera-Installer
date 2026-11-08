@@ -73,6 +73,16 @@ Falls der Controller im Spiel nicht reagiert (Eglantine ist anfangs auf Tastatur
 
 Die Einstellungen gelten danach für alle Spiele. Dort kannst du auch Grafik und Ähnliches anpassen. Vulkan, asynchrone Shader und der Shader-Cache sind bereits voreingestellt.
 
+## Fenster vor dem Spielstart
+
+Manche Spiele (z. B. Mario Kart World und Ocarina of Time) fragen vor dem Start „Use the recommended settings?“. Diese Fenster lassen sich mit dem Controller beantworten:
+
+- **Steuerkreuz links / rechts** – zwischen Yes und No wechseln
+- **A** – markierte Auswahl bestätigen
+- **B** – No / Abbrechen
+
+Das funktioniert nur, solange so ein Fenster offen ist, und stört das Spiel daher nicht.
+
 ## Spiel beenden
 
 **Select (oder Guide) + Start** am Controller.
